@@ -1,19 +1,19 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	5.26.5
+%define		kdeplasmaver	5.27.0
 %define		qtver		5.15.2
 %define		kpname		plasma-remotecontrollers
 %define		kf5ver		5.39.0
 
 Summary:	plasma-remotecontrollers
 Name:		kp5-%{kpname}
-Version:	5.26.5
+Version:	5.27.0
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	d55d570e84840440f89233c8915e5872
+# Source0-md5:	ffea849acae845fed77e2b88734248d6
 URL:		https://kde.org/
 BuildRequires:	Qt5Core-devel >= 5.15.2
 BuildRequires:	Qt5DBus-devel >= 5.15.2
@@ -87,12 +87,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/plasma-remotecontrollers
 %{_libdir}/qt5/plugins/kcms/kcm_mediacenter_remotecontrollers.so
 %dir %{_libdir}/qt5/qml/org/kde/plasma/remotecontrollers
-%{_libdir}/qt5/qml/org/kde/plasma/remotecontrollers/libremotecontrollersplugin.so
 %{_libdir}/qt5/qml/org/kde/plasma/remotecontrollers/qmldir
 %{_libdir}/udev/rules.d/40-uinput.rules
 %{_desktopdir}/org.kde.plasma-remotecontrollers.desktop
-%{_datadir}/dbus-1/interfaces/org.kde.plasma-remotecontrollers.CEC.xml
-%{_datadir}/dbus-1/interfaces/org.kde.plasma-remotecontrollers.EVDEV.xml
 %{_datadir}/knotifications5/plasma-remotecontrollers.notifyrc
 %dir %{_datadir}/kpackage/kcms/kcm_mediacenter_remotecontrollers
 %dir %{_datadir}/kpackage/kcms/kcm_mediacenter_remotecontrollers/contents
@@ -113,3 +110,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kservices5/kcm_mediacenter_remotecontrollers.desktop
 %{_datadir}/metainfo/org.kde.plasma.remotecontrollers.metainfo.xml
 %{_datadir}/qlogging-categories5/plasma-remotecontrollers.categories
+%{_datadir}/dbus-1/interfaces/org.kde.plasma.remotecontrollers.CEC.xml
+%{_datadir}/dbus-1/interfaces/org.kde.plasma.remotecontrollers.ControllerManager.xml
+%{_datadir}/dbus-1/interfaces/org.kde.plasma.remotecontrollers.EVDEV.xml
