@@ -14,6 +14,7 @@ License:	LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
 # Source0-md5:	a1d5c114997f50bc6a6e1c40cc63009c
+Patch0:		udev.patch
 URL:		https://kde.org/
 BuildRequires:	Qt5Core-devel >= 5.15.2
 BuildRequires:	Qt5DBus-devel >= 5.15.2
@@ -34,7 +35,9 @@ BuildRequires:	kf5-kitemmodels-devel >= 5.98.0
 BuildRequires:	kf5-knotifications-devel >= 5.68.0
 BuildRequires:	kf5-kpackage-devel >= 5.68.0
 BuildRequires:	kf5-kwindowsystem-devel >= 5.68.0
+BuildRequires:	kf5-plasma-wayland-protocols-devel >= 1.10.0
 BuildRequires:	kf5-solid-devel >= 5.68.0
+BuildRequires:	kp5-kscreenlocker-devel >= %{version}
 BuildRequires:	kp5-plasma-workspace-devel >= %{version}
 BuildRequires:	libcec-devel
 BuildRequires:	libevdev-devel
@@ -55,6 +58,7 @@ keypresses on a keyboard and pointer events (mouse movement).
 
 %prep
 %setup -q -n %{kpname}-%{version}
+%patch0 -p1
 
 %build
 install -d build
@@ -88,7 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt5/plugins/kcms/kcm_mediacenter_remotecontrollers.so
 %dir %{_libdir}/qt5/qml/org/kde/plasma/remotecontrollers
 %{_libdir}/qt5/qml/org/kde/plasma/remotecontrollers/qmldir
-%{_libdir}/udev/rules.d/40-uinput.rules
+/lib/udev/rules.d/40-uinput.rules
 %{_desktopdir}/org.kde.plasma-remotecontrollers.desktop
 %{_datadir}/knotifications5/plasma-remotecontrollers.notifyrc
 %dir %{_datadir}/kpackage/kcms/kcm_mediacenter_remotecontrollers
@@ -98,6 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/kpackage/kcms/kcm_mediacenter_remotecontrollers/contents/ui/delegates
 %{_datadir}/kpackage/kcms/kcm_mediacenter_remotecontrollers/contents/ui/+mediacenter/DeviceMap.qml
 %{_datadir}/kpackage/kcms/kcm_mediacenter_remotecontrollers/contents/ui/+mediacenter/DeviceSetupView.qml
+%dir %{_datadir}/kpackage/kcms/kcm_mediacenter_remotecontrollers/contents/ui/+mediacenter/delegates
 %{_datadir}/kpackage/kcms/kcm_mediacenter_remotecontrollers/contents/ui/+mediacenter/delegates/DeviceDelegate.qml
 %{_datadir}/kpackage/kcms/kcm_mediacenter_remotecontrollers/contents/ui/+mediacenter/main.qml
 %{_datadir}/kpackage/kcms/kcm_mediacenter_remotecontrollers/contents/ui/DeviceMap.qml
