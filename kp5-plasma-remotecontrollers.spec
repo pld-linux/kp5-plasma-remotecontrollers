@@ -1,19 +1,19 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	5.27.6
+%define		kdeplasmaver	5.27.7
 %define		qtver		5.15.2
 %define		kpname		plasma-remotecontrollers
 %define		kf5ver		5.39.0
 
 Summary:	plasma-remotecontrollers
 Name:		kp5-%{kpname}
-Version:	5.27.6
+Version:	5.27.7
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	426353863fb2e3996724056426583d37
+# Source0-md5:	fb25df16ef388f7dbfc163911e7828be
 Patch0:		udev.patch
 URL:		https://kde.org/
 BuildRequires:	Qt5Core-devel >= 5.15.2
@@ -24,7 +24,7 @@ BuildRequires:	Qt5Network-devel >= 5.15.0
 BuildRequires:	Qt5Qml-devel
 BuildRequires:	Qt5Quick-devel
 BuildRequires:	Qt5WaylandClient-devel
-BuildRequires:	cmake >= 2.8.12
+BuildRequires:	cmake >= 3.16.0
 BuildRequires:	gettext
 BuildRequires:	kf5-kcmutils-devel >= 5.68.0
 BuildRequires:	kf5-kconfig-devel >= 5.99.0
@@ -61,14 +61,12 @@ keypresses on a keyboard and pointer events (mouse movement).
 %patch0 -p1
 
 %build
-install -d build
-cd build
-%cmake -G Ninja \
+%cmake -B build \
+	-G Ninja \
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
-	-DHTML_INSTALL_DIR=%{_kdedocdir} \
-	../
-%ninja_build
+	-DHTML_INSTALL_DIR=%{_kdedocdir}
+%ninja_build -C build
 
 %if %{with tests}
 ctest
