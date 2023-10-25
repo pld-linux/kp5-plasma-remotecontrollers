@@ -1,19 +1,19 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	5.27.8
+%define		kdeplasmaver	5.27.9
 %define		qtver		5.15.2
 %define		kpname		plasma-remotecontrollers
 %define		kf5ver		5.39.0
 
 Summary:	plasma-remotecontrollers
 Name:		kp5-%{kpname}
-Version:	5.27.8
+Version:	5.27.9
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	777f68cf45617abddd5fb682d276ed1b
+# Source0-md5:	c1c4cd9ab636a11ac202c20ed7d6d92e
 Patch0:		udev.patch
 URL:		https://kde.org/
 BuildRequires:	Qt5Core-devel >= 5.15.2
